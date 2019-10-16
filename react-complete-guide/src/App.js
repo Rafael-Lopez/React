@@ -4,17 +4,27 @@ import Person from './Person/Person';
 
 class App extends Component {
     
-    // state is a special property for any React component. So you can only use this within classes that extend Component
+    // state is a special property for any React component (same for props). So you can only use this within classes that extend Component
     // What is special about 'state' is that if something in it changes, then React will re-render the component automatically to display the new value
     state = {
         persons: [
             { name: 'Max', age: 28 },
             { name: 'Manu', age: 29}
-        ]
+        ],
+        otherState: 'some othe value'
     };
 
     switchNameHandler = () => {
-        console.log('Was clicked');
+        // DON'T DO THIS: this.state.persons[0].name = 'Maximilian';
+        
+        // setState is a sepcial method provided by React. This will ensure React knows about the change in the state so that it can update the UI
+        // The code below will merge the new info with the old one. This means, only the 'persons' property will be updated, and 'otherState' will remaind untouched
+        this.setState({
+            persons: [
+                { name: 'Maximilian', age: 28 },
+                { name: 'Manu', age: 30}
+            ]
+        });
     };
     
     render() {
