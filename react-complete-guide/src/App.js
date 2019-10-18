@@ -8,8 +8,8 @@ class App extends Component {
     // What is special about 'state' is that if something in it changes, then React will re-render the component automatically to display the new value
     state = {
         persons: [
-            { name: 'Max', age: 28 },
-            { name: 'Manu', age: 29 }
+            { id: 'aaa', name: 'Max', age: 28 },
+            { id: 'bbe', name: 'Manu', age: 29 }
         ],
         otherState: 'some othe value',
         showPersons: false
@@ -54,7 +54,8 @@ class App extends Component {
                         return <Person
                             click={ () => this.deletePersonHandler(index) }
                             name={person.name} 
-                            age={person.age} />
+                            age={person.age} 
+                            key={person.id} />
                     } ) }
                 </div>
             );    
