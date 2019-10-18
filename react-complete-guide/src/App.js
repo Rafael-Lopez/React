@@ -15,19 +15,12 @@ class App extends Component {
         showPersons: false
     };
 
-    switchNameHandler = (newName) => {
-        // DON'T DO THIS: this.state.persons[0].name = 'Maximilian';
-        
-        // setState is a sepcial method provided by React. This will ensure React knows about the change in the state so that it can update the UI
-        // The code below will merge the new info with the old one. This means, only the 'persons' property will be updated, and 'otherState' will remaind untouched
-        this.setState({
-            persons: [
-                { name: newName, age: 28 },
-                { name: 'Manu', age: 30}
-            ]
-        });
+    deletePersonHandler = (personIndex) => {
+        const persons = this.state.persons;
+        persons.splice(personIndex, 1);
+        this.setState({persons: persons});
     };
-
+    
     nameChangeHandler = (event) => {
         this.setState({
             persons: [
@@ -57,8 +50,9 @@ class App extends Component {
         if (this.state.showPersons) {
             persons = (
                 <div>
-                    { this.state.persons.map( (person) => {
-                        return <Person 
+                    { this.state.persons.map( (person, index) => {
+                        return <Person
+                            click={ () => this.deletePersonHandler(index) }
                             name={person.name} 
                             age={person.age} />
                     } ) }
