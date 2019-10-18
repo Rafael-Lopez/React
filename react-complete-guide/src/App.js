@@ -52,6 +52,24 @@ class App extends Component {
             cursor: 'pointer'
         };
         
+        let persons = null;
+        
+        if (this.state.showPersons) {
+            persons = (
+                <div>
+                    <Person 
+                        name={this.state.persons[0].name} 
+                        age={this.state.persons[0].age} />
+                    <Person 
+                        name={this.state.persons[1].name} 
+                        age={this.state.persons[1].age}
+                        click={this.switchNameHandler.bind(this, 'Maximilian!')}
+                        changed={this.nameChangeHandler}>My hobbies: Racing
+                    </Person>
+                </div>
+            );    
+        }
+        
         // This is the JSX version
         // JSX is similar to HTML but it's not  
         return (
@@ -63,19 +81,7 @@ class App extends Component {
                 <button 
                     style={style}
                     onClick={this.tooglePersonsHandler}>Toogle Persons</button>
-                    { this.state.showPersons ? 
-                        <div>
-                            <Person 
-                                name={this.state.persons[0].name} 
-                                age={this.state.persons[0].age} />
-                            <Person 
-                                name={this.state.persons[1].name} 
-                                age={this.state.persons[1].age}
-                                click={this.switchNameHandler.bind(this, 'Maximilian!')}
-                                changed={this.nameChangeHandler}>My hobbies: Racing
-                            </Person>
-                        </div> : null
-                    }
+                    { persons }
             </div>
         );
         // Another way to do the same as above  
