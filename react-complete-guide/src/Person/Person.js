@@ -1,5 +1,6 @@
 import React from 'react';
 import './Person.css';
+import Radium from 'radium';
 
 // 'props' is passed by default by React
 // It includes all the attributes you add to your component
@@ -13,4 +14,4 @@ const person = (props) => {
     );
 };
 
-export default person;
+export default Radium(person);
