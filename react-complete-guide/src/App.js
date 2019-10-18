@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -76,12 +76,12 @@ class App extends Component {
             style.backgroundColor = 'red';
         }
         
-        const classes = [];
+        const assignedClasses = [];
         if(this.state.persons.length <= 2) {
-            classes.push('red');
+            assignedClasses.push(classes.red);
         }
         if(this.state.persons.length <= 1) {
-            classes.push('bold');
+            assignedClasses.push(classes.bold);
         }
         
         
@@ -90,9 +90,9 @@ class App extends Component {
         return (
             // Typically, you only want one root element per component. In this case, 'div' is the root element.
             // In HTML, the original attribute is class, but since this is JSX, 'class' can't be used since it's a JS reserved word. Instead, we have to use className
-            <div className="App">
+            <div className={classes.App}>
                 <h1>Hi, I'm a React App</h1>
-                <p className={classes.join(' ')}>This is really working!</p>
+                <p className={assignedClasses.join(' ')}>This is really working!</p>
                 <button 
                     style={style}
                     onClick={this.tooglePersonsHandler}>Toogle Persons</button>
