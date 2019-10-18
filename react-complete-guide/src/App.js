@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
-import Radium from 'radium';
+import Radium, {StyleRoot} from 'radium';
 
 class App extends Component {
     
@@ -99,6 +99,7 @@ class App extends Component {
         return (
             // Typically, you only want one root element per component. In this case, 'div' is the root element.
             // In HTML, the original attribute is class, but since this is JSX, 'class' can't be used since it's a JS reserved word. Instead, we have to use className
+            <StyleRoot>
             <div className="App">
                 <h1>Hi, I'm a React App</h1>
                 <p className={classes.join(' ')}>This is really working!</p>
@@ -107,6 +108,7 @@ class App extends Component {
                     onClick={this.tooglePersonsHandler}>Toogle Persons</button>
                     { persons }
             </div>
+            </StyleRoot>
         );
         // Another way to do the same as above  
         // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App!!!'));  
