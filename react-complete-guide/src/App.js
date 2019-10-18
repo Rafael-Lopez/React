@@ -9,7 +9,8 @@ class App extends Component {
     state = {
         persons: [
             { id: 'aaa', name: 'Max', age: 28 },
-            { id: 'bbe', name: 'Manu', age: 29 }
+            { id: 'bbe', name: 'Manu', age: 29 },
+            { id: 'bse', name: 'Test', age: 30 }
         ],
         otherState: 'some othe value',
         showPersons: false
@@ -75,6 +76,15 @@ class App extends Component {
             style.backgroundColor = 'red';
         }
         
+        const classes = [];
+        if(this.state.persons.length <= 2) {
+            classes.push('red');
+        }
+        if(this.state.persons.length <= 1) {
+            classes.push('bold');
+        }
+        
+        
         // This is the JSX version
         // JSX is similar to HTML but it's not  
         return (
@@ -82,7 +92,7 @@ class App extends Component {
             // In HTML, the original attribute is class, but since this is JSX, 'class' can't be used since it's a JS reserved word. Instead, we have to use className
             <div className="App">
                 <h1>Hi, I'm a React App</h1>
-                <p>This is really working!</p>
+                <p className={classes.join(' ')}>This is really working!</p>
                 <button 
                     style={style}
                     onClick={this.tooglePersonsHandler}>Toogle Persons</button>
