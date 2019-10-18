@@ -21,13 +21,23 @@ class App extends Component {
         this.setState({persons: persons});
     };
     
-    nameChangeHandler = (event) => {
-        this.setState({
-            persons: [
-                { name: 'Maxi', age: 28 },
-                { name: event.target.value, age: 30}
-            ]
-        });
+    nameChangeHandler = (event, id) => {       
+        const personIndex = this.state.persons.findIndex( p => {
+            return p.id === id;
+        } );
+        
+        //It's a best practice to never mutate the original state directly
+        //Instead, create a copy of what you're trying to change
+        const person = {
+            ...this.state.persons[personIndex]
+        };
+        
+        person.name = event.target.value;
+        
+        const persons = [...this.state.persons];
+        persons[personIndex] = person;
+        
+        this.setState( {persons: persons} );
     };
 
     tooglePersonsHandler = () => {
@@ -55,7 +65,8 @@ class App extends Component {
                             click={ () => this.deletePersonHandler(index) }
                             name={person.name} 
                             age={person.age} 
-                            key={person.id} />
+                            key={person.id} 
+                            changed={ (event) => this.nameChangeHandler(event, person.id) } />
                     } ) }
                 </div>
             );    
