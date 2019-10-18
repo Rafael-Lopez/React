@@ -11,7 +11,8 @@ class App extends Component {
             { name: 'Max', age: 28 },
             { name: 'Manu', age: 29 }
         ],
-        otherState: 'some othe value'
+        otherState: 'some othe value',
+        showPersons: false
     };
 
     switchNameHandler = (newName) => {
@@ -35,6 +36,11 @@ class App extends Component {
             ]
         });
     };
+
+    tooglePersonsHandler = () => {
+        const doesShow = this.state.showPersons;
+        this.setState( {showPersons: !doesShow} );
+    };
     
     render() {
         
@@ -56,16 +62,20 @@ class App extends Component {
                 <p>This is really working!</p>
                 <button 
                     style={style}
-                    onClick={ () => this.switchNameHandler('Maximilian') }>Switch name</button>
-                <Person 
-                    name={this.state.persons[0].name} 
-                    age={this.state.persons[0].age} />
-                <Person 
-                    name={this.state.persons[1].name} 
-                    age={this.state.persons[1].age}
-                    click={this.switchNameHandler.bind(this, 'Maximilian!')}
-                    changed={this.nameChangeHandler}>My hobbies: Racing
-                </Person>
+                    onClick={this.tooglePersonsHandler}>Toogle Persons</button>
+                    { this.state.showPersons ? 
+                        <div>
+                            <Person 
+                                name={this.state.persons[0].name} 
+                                age={this.state.persons[0].age} />
+                            <Person 
+                                name={this.state.persons[1].name} 
+                                age={this.state.persons[1].age}
+                                click={this.switchNameHandler.bind(this, 'Maximilian!')}
+                                changed={this.nameChangeHandler}>My hobbies: Racing
+                            </Person>
+                        </div> : null
+                    }
             </div>
         );
         // Another way to do the same as above  
