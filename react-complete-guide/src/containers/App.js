@@ -5,6 +5,23 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
     
+    // Here you set up state. Do not cause side-effects
+    constructor(props) {
+        super(props);
+        console.log('[App.js] constructor');
+    }
+    
+    // lifecycle to sync state. Do not cause side-effects
+    static getDerivedStateFromProps(props, state) {
+        console.log('[App.js] getDerivedStateFromProps', props);
+        return state;
+    }
+    
+    // lifecycle where you can cause side-effects, like making HTTP requests to get new data, etc. Do not update state here as it triggers a render
+    componentDidMount() {
+        console.log('[App.js] componentDidMount');
+    }
+    
     // state is a special property for any React component (same for props). So you can only use this within classes that extend Component
     // What is special about 'state' is that if something in it changes, then React will re-render the component automatically to display the new value
     state = {
@@ -47,8 +64,10 @@ class App extends Component {
         this.setState( {showPersons: !doesShow} );
     };
     
+    // lifecycle to prepare and structure your JSX code
+    // child components are rendered after this
     render() {
-        
+        console.log('[App.js] render');
         let persons = null;
         
         if (this.state.showPersons) {
