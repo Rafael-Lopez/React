@@ -64,6 +64,7 @@ class App extends Component {
             // In HTML, the original attribute is class, but since this is JSX, 'class' can't be used since it's a JS reserved word. Instead, we have to use className
             <div className={classes.App}>
                 <Cockpit 
+                    title={this.props.appTitle}
                     showPersons={this.state.showPersons}
                     persons={this.state.persons} 
                     clicked={this.tooglePersonsHandler} />
