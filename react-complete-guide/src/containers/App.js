@@ -22,6 +22,15 @@ class App extends Component {
         console.log('[App.js] componentDidMount');
     }
     
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('[App.js] shouldComponentUpdate');
+        return true;
+    }
+    
+    componentDidUpdate() {
+        console.log('[App.js] componentDidUpdate');
+    }  
+    
     // state is a special property for any React component (same for props). So you can only use this within classes that extend Component
     // What is special about 'state' is that if something in it changes, then React will re-render the component automatically to display the new value
     state = {
