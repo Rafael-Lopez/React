@@ -12,8 +12,25 @@ const cockpit = (props) => {
         setTimeout( () => {
             alert('Saved data to cloud!');
         }, 1000);
-    }, [props.persons]); //To control when to run useEffect, pass a second argument that is the array of values that the effect depends on. For exmaple, only when props.persons changes
-    //If you want to only run it one time after the component is rendered correctly, (AKA simulate componentDidMount), you can pass an empty array [] instead
+        
+        //You can avoid returning anything (no return needed), or you can return a function that will run after every render cycle
+        return () => {
+            console.log('[Cockpit.js] cleanup work in useEffect');
+        }
+        
+    }, []); // To control when to run useEffect, pass a second argument that is the array of values that the effect depends on. For exmaple, only when props.persons changes
+    // If you want to only run it one time after the component is rendered correctly, (AKA simulate componentDidMount), you can pass an empty array [] instead
+    // If you use useEffect and pass and empty array, that also means that the function will only be run when the component is render the first time and when is unmounted
+    
+    // You can have multiple useEffect
+    // This will run al the time since we are not passing a second argument
+    useEffect( () => {
+        console.log('[Cockpit.js] 2nd useEffect');
+        
+        return () => {
+            console.log('[Cockpit.js] cleanup work in 2nd useEffect');
+        }        
+    });
     
     const assignedClasses = [];
     let btnClass = '';

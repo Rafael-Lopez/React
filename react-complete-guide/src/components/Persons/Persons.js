@@ -26,6 +26,10 @@ class Persons extends Component {
         console.log(snapshot);
     }
     
+    componentWillUnmount() {
+        console.log('[Persons.js] componentWillUnmount');
+    }
+    
     // lifecycle to prepare and structure your JSX code
     // child components are rendered after this
     render() {

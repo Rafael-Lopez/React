@@ -40,7 +40,8 @@ class App extends Component {
             { id: 'bse', name: 'Test', age: 30 }
         ],
         otherState: 'some othe value',
-        showPersons: false
+        showPersons: false,
+        showCockpit: true
     };
 
     deletePersonHandler = (personIndex) => {
@@ -91,11 +92,17 @@ class App extends Component {
             // Typically, you only want one root element per component. In this case, 'div' is the root element.
             // In HTML, the original attribute is class, but since this is JSX, 'class' can't be used since it's a JS reserved word. Instead, we have to use className
             <div className={classes.App}>
-                <Cockpit 
-                    title={this.props.appTitle}
-                    showPersons={this.state.showPersons}
-                    persons={this.state.persons} 
-                    clicked={this.tooglePersonsHandler} />
+                <button 
+                    onClick={ () => {
+                        this.setState({showCockpit: false})
+                    }}>Remove Cockpit</button>
+                    {this.state.showCockpit ?   
+                        <Cockpit 
+                            title={this.props.appTitle}
+                            showPersons={this.state.showPersons}
+                            persons={this.state.persons} 
+                            clicked={this.tooglePersonsHandler} /> : null 
+                    }
                 { persons }
             </div>
         );
