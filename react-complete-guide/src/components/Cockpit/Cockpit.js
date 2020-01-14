@@ -39,10 +39,10 @@ const cockpit = (props) => {
        btnClass = classes.Red; 
     }
     
-    if(props.persons.length <= 2) {
+    if(props.personsLength <= 2) {
         assignedClasses.push(classes.red);
     }
-    if(props.persons.length <= 1) {
+    if(props.personsLength <= 1) {
         assignedClasses.push(classes.bold);
     }
     
@@ -58,4 +58,5 @@ const cockpit = (props) => {
     );
 }
 
-export default cockpit;
+//Optimize functional cmponents so that they don't render when the parent component renders but the props for this component don't change
+export default React.memo(cockpit);
