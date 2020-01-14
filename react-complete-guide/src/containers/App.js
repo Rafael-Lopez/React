@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../hoc/WithClass';
 
 class App extends Component {
     
@@ -91,7 +92,7 @@ class App extends Component {
         return (
             // Typically, you only want one root element per component. In this case, 'div' is the root element.
             // In HTML, the original attribute is class, but since this is JSX, 'class' can't be used since it's a JS reserved word. Instead, we have to use className
-            <div className={classes.App}>
+            <WithClass classes={classes.App}>
                 <button 
                     onClick={ () => {
                         this.setState({showCockpit: false})
@@ -104,7 +105,7 @@ class App extends Component {
                             clicked={this.tooglePersonsHandler} /> : null 
                     }
                 { persons }
-            </div>
+            </WithClass>
         );
         // Another way to do the same as above  
         // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App!!!'));  
