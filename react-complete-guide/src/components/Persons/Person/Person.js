@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import classes from './Person.css';
 import Auxiliary from '../../../hoc/Auxiliary';
+import withClass from '../../../hoc/withClass';
 
 // 'props' is passed by default by React
 // It includes all the attributes you add to your component
@@ -21,4 +22,4 @@ class Person extends Component {
     }    
 }
 
-export default Person;
+export default withClass(Person, classes.Person);
