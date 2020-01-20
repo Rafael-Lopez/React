@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import classes from './Person.css';
 import Auxiliary from '../../../hoc/Auxiliary';
 import withClass from '../../../hoc/withClass';
+import AuthContext from '../../../context/auth-context';
 
 // 'props' is passed by default by React
 // It includes all the attributes you add to your component
@@ -21,7 +22,11 @@ class Person extends Component {
         console.log('[Person.js] rendering...');
         return (
             <Auxiliary className={classes.Person}>
-                {this.props.isAuth ? <p>Authenticated!</p> : <p>Please log in</p>}
+                <AuthContext.Consumer>
+                    { (context) => 
+                        context.authenticated ? <p>Authenticated!</p> : <p>Please log in</p>
+                    }
+                </AuthContext.Consumer>         
                 <p onClick={this.props.click} >I'm {this.props.name} and I am {this.props.age} years old!</p>
                 <p>{this.props.children}</p>
                 <input 
