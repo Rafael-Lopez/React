@@ -1,7 +1,9 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import classes from './Cockpit.css';
 
 const cockpit = (props) => {
+    
+    const toggleBtnRef = useRef(null);
     
     // useEffect is a React hook
     // Runs for every render cycle (for every update). Takes in a function and executes it
@@ -9,9 +11,10 @@ const cockpit = (props) => {
         console.log('[Cockpit.js] useEffect');
         
         // Fake HTTP request...
-        setTimeout( () => {
-            alert('Saved data to cloud!');
-        }, 1000);
+        //setTimeout( () => {
+        //    alert('Saved data to cloud!');
+        //}, 1000);
+        toggleBtnRef.current.click();
         
         //You can avoid returning anything (no return needed), or you can return a function that will run after every render cycle
         return () => {
@@ -51,6 +54,7 @@ const cockpit = (props) => {
             <h1>{props.title}</h1>
             <p className={assignedClasses.join(' ')}>This is really working!</p>
             <button 
+                ref={toggleBtnRef}
                 className={btnClass}
                 onClick={props.clicked}>Toogle Persons
             </button>
