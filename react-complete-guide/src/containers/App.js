@@ -44,7 +44,8 @@ class App extends Component {
         otherState: 'some othe value',
         showPersons: false,
         showCockpit: true,
-        changeCounter: 0
+        changeCounter: 0,
+        authenticated: false
     };
 
     deletePersonHandler = (personIndex) => {
@@ -81,6 +82,10 @@ class App extends Component {
         const doesShow = this.state.showPersons;
         this.setState( {showPersons: !doesShow} );
     };
+
+    loginHandler = () => {
+        this.setState({authenticated: true});
+    };
     
     // lifecycle to prepare and structure your JSX code
     // child components are rendered after this
@@ -92,7 +97,8 @@ class App extends Component {
             persons = <Persons 
                         persons = {this.state.persons}
                         clicked = {this.deletePersonHandler}
-                        changed = {this.nameChangeHandler} />; 
+                        changed = {this.nameChangeHandler}
+                        isAuthenticated={this.state.authenticated} />; 
         }
         
         // This is the JSX version. JSX is similar to HTML but it's not  
@@ -109,7 +115,8 @@ class App extends Component {
                             title={this.props.appTitle}
                             showPersons={this.state.showPersons}
                             personsLength={this.state.persons.length} 
-                            clicked={this.tooglePersonsHandler} /> : null 
+                            clicked={this.tooglePersonsHandler} 
+                            login={this.loginHandler} /> : null 
                     }
                 { persons }
             </Auxiliary>
