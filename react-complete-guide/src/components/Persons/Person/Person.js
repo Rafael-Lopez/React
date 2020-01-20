@@ -7,7 +7,7 @@ import withClass from '../../../hoc/withClass';
 // It includes all the attributes you add to your component
 class Person extends Component {
     
-    constructor() {
+    constructor(props) {
         super(props);
         this.inputElementRef = React.createRef();
     }
