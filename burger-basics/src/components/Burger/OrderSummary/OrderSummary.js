@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Auxiliar from '../../../hoc/Auxiliar';
+import Auxiliar from '../../../hoc/Auxiliar/Auxiliar';
 import Button from '../../UI/Button/Button';
 
 //This could be a functional component since Modal (the wrapping component)
