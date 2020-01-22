@@ -18,7 +18,7 @@ class Blog extends Component {
 
         //GET returns a Promise object. Once the promise is fulfilled, the THEN
         //part gets executed. Here's where you can manipulate the result
-        axios.get('https://jsonplaceholder.typicode.com/posts')
+        axios.get('/posts')
             .then( response => {
                 const posts = response.data.slice(0, 4);
                 const updatedPosts = posts.map(post => {
