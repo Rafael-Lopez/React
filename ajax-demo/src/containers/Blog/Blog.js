@@ -8,23 +8,31 @@ import axios from 'axios';
 
 class Blog extends Component {
 
+    state = {
+        posts: []
+    }
+
     componentDidMount() {
 
         //GET returns a Promise object. Once the promise is fulfilled, the THEN
         //part gets executed. Here's where you can manipulate the result
         axios.get('https://jsonplaceholder.typicode.com/posts')
             .then( response => {
-                console.log(response);
+                this.setState( {posts: response.data} );
             });
     }
 
     render () {
+
+        const posts = this.state.posts.map( post => {
+                return <Post key={post.id} title={post.title}/>
+            }
+        );
+
         return (
             <div>
                 <section className="Posts">
-                    <Post />
-                    <Post />
-                    <Post />
+                    {posts}
                 </section>
                 <section>
                     <FullPost />
