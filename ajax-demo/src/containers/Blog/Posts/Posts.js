@@ -10,6 +10,8 @@ class Posts extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props);
+
         //GET returns a Promise object. Once the promise is fulfilled, the THEN
         //part gets executed. Here's where you can manipulate the result
         axios.get('/posts')
