@@ -6,6 +6,10 @@ import './Blog.css';
 
 class Blog extends Component {
 
+    state = {
+        auth: false
+    }
+
     render () {
         //If you use a regular <a> tag for links, you will trigger a full update for the app
         //Instead, use Link which is the primary way to allow users to navigate around your application
@@ -32,7 +36,7 @@ class Blog extends Component {
                     </nav>
                 </header>
                 <Switch>
-                    <Route path='/new-post' exact component={NewPost} />
+                    {this.state.auth ? <Route path='/new-post' exact component={NewPost} /> : null}
                     <Route path='/posts' component={Posts} />
                     <Redirect from='/' to='/posts' />
                     {/*OR <Route path='/' component={Posts} />*/}
