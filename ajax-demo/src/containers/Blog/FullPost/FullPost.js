@@ -8,13 +8,12 @@ class FullPost extends Component {
         loadedPost: null
     }
 
-    // If you use setState inside componentDidUpdate it updates the component, resulting in a call to
-    // componentDidUpdate which subsequently calls setState again resulting in the infinite loop.
-    // You should conditionally call setState and ensure that the condition violating the call occurs eventually.
-    componentDidUpdate() {
-        if (this.props.id) {
+    componentDidMount() {
+        //Use the 'match' property provided by React Router to access the 'id' parameter we set up
+        //in the Blog component (<Route path='/:id' component={FullPost} />)
+        if (this.props.match.params.id) {
             if(!this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id !== this.props.id)) {
-                axios.get('/posts/' + this.props.id)
+                axios.get('/posts/' + this.props.match.params.id)
                     .then(response => {
                         this.setState({loadedPost: response.data})
                     });
