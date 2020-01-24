@@ -24,7 +24,11 @@ class NewPost extends Component {
         axios.post('/posts', data)
             .then( response => {
                 console.log(response);
-                this.setState({submitted: true});
+                //If you press Back after redirected, you will go back to the New Post screen, because push() pushes a new page into the stack
+                //this.props.history.push('/posts');
+                //Same as Redirect, it actually replaces the current page in the stack. This means you will go back to /posts since that's where you were last
+                this.props.history.replace('/posts');
+                //this.setState({submitted: true});
             });
     }
 
