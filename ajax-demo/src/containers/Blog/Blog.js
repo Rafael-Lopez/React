@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Posts from '../../containers/Blog/Posts/Posts'
 import NewPost from "./NewPost/NewPost";
 import FullPost from "./FullPost/FullPost";
-import {Route, NavLink} from "react-router-dom";
+import {Route, NavLink, Switch} from "react-router-dom";
 import './Blog.css';
 
 class Blog extends Component {
@@ -33,8 +33,10 @@ class Blog extends Component {
                     </nav>
                 </header>
                 <Route path='/' exact component={Posts} />
-                <Route path='/new-post' exact component={NewPost} />
-                <Route path='/:id' component={FullPost} />
+                <Switch>
+                    <Route path='/new-post' exact component={NewPost} />
+                    <Route path='/:id' component={FullPost} />
+                </Switch>
             </div>
         );
     }
