@@ -1,0 +1,11 @@
+.App a {
+    text-decoration: underline;
+    color: black;
+    padding: 10px;
+}
+
+.App a:hover,
+.App a:active,
+.App a.active {
+    color: orange;
+}
