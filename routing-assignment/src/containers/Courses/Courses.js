@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { Link, Route } from 'react-router-dom';
 
 import './Courses.css';
-import {Link, Route} from "react-router-dom";
-import Course from "../Course/Course";
+import Course from '../Course/Course';
 
 class Courses extends Component {
     state = {
@@ -10,14 +10,7 @@ class Courses extends Component {
             { id: 1, title: 'Angular - The Complete Guide' },
             { id: 2, title: 'Vue - The Complete Guide' },
             { id: 3, title: 'PWA - The Complete Guide' }
-        ],
-        selectedCourseId: null
-    }
-
-    selectCourse = (id) => {
-        this.setState({
-            selectedCourseId: id
-        });
+        ]
     }
 
     render () {
@@ -27,14 +20,20 @@ class Courses extends Component {
                 <section className="Courses">
                     {
                         this.state.courses.map( course => {
-                            return <Link
-                                to={{ pathname: this.props.match.url + '/' + course.id, query: { title: course.title } }}
-                                className="Course" key={course.id}
-                                onClick={() => this.selectCourse(course.id)}>{course.title}</Link>;
+                            return (
+                                <Link
+                                    key={course.id}
+                                    to={{
+                                        pathname: this.props.match.url + '/' + course.id,
+                                        search: '?title=' + course.title
+                                    }}>
+                                    <article className="Course">{course.title}</article>
+                                </Link>
+                            );
                         } )
                     }
                 </section>
-                <Route path={this.props.match.url + '/:id'} render={() => (<Course id={this.state.selectedCourseId}/>)} />
+                <Route path={this.props.match.url + '/:courseId'} component={Course} />
             </div>
         );
     }
