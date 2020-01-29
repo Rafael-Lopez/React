@@ -13,11 +13,17 @@ const reducer = (state = initialState, action) => {
                 age: action.personData.age
             }
 
-            return {persons: state.persons.concat(newPerson)};
+            return {
+                ...state,
+                persons: state.persons.concat(newPerson)
+            };
         case actionTypes.DELETE_PERSON:
             const updatedArray = state.persons.filter(result => result.id !== action.id );
 
-            return {persons: updatedArray};
+            return {
+                ...state,
+                persons: updatedArray
+            };
         default:
             break;
     }
