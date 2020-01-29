@@ -1,8 +1,7 @@
-import * as actionTypes from './actions';
+import * as actionTypes from '../actions';
 
 const initialState = {
-    counter: 0,
-    results: []
+    counter: 0
 };
 
 const reducer = (state = initialState, action) => {
@@ -26,20 +25,6 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 counter: state.counter - action.value
-            };
-        case actionTypes.STORE_RESULT:
-            return {
-                ...state,
-                // concat() returns a new Array + the element being concatenated. Therefore, we are still updating the state immutably
-                // push() does not create a new Array. Therefore, it's not immutably
-                results: state.results.concat({id: new Date(), value: state.counter})
-            };
-        case actionTypes.DELETE_RESULT:
-            const updatedArray = state.results.filter(result => result.id !== action.resultElId );
-
-            return {
-                ...state,
-                results: updatedArray
             };
     }
 
