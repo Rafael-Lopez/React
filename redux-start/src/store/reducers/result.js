@@ -4,6 +4,7 @@ const initialState = {
     results: []
 };
 
+//REDUX state can only be updated synchronously
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.STORE_RESULT:
