@@ -28,6 +28,10 @@ function Ingredients() {
             });
     }, []);
 
+    const filteredIngredientsHandler = filteredIngredients => {
+        setUserIngredients(filteredIngredients);
+    };
+
     const addIngredientHandler = ingredient => {
         //We use fetch() this time instead of Axios, just to explore another solution
         fetch('https://react-hooks-update-7cad4.firebaseio.com/ingredients.json', {
@@ -54,7 +58,7 @@ function Ingredients() {
             <IngredientForm onAddIngredient={addIngredientHandler} />
 
             <section>
-            <Search />
+            <Search onLoadIngredients={filteredIngredientsHandler}/>
             <IngredientList ingredients={userIngredients} onRemoveItem={removeIngredientHandler}/>
             </section>
         </div>
