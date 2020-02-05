@@ -16,7 +16,7 @@ const Search = React.memo(props => {
     // will act as componentDidMount: it runs only one (after the first render)
     // This useEffect() only runs when enteredFilter or props.onLoadIngredients change
     useEffect(() => {
-        setTimeout(() => {
+        const timer = setTimeout(() => {
             if(enteredFilter === inputRef.current.value) {
                 const query = enteredFilter.length === 0 ? '' : `?orderBy="title"&equalTo="${enteredFilter}"`;
                 fetch('https://react-hooks-update-7cad4.firebaseio.com/ingredients.json' + query)
@@ -34,6 +34,12 @@ const Search = React.memo(props => {
                     });
             }
         }, 500);
+
+        // You can return a function that will be run to do some clean up
+        // This function will run before the next time this useEffect() is used
+        return () => {
+            clearTimeout(timer);
+        };
     }, [enteredFilter, onLoadIngredients, inputRef]);
 
     return (
