@@ -8,7 +8,7 @@ import ErrorModal from "../UI/ErrorModal";
 function Ingredients() {
     const [userIngredients, setUserIngredients] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState(null);
 
     // useCallback will return a memoized version of the callback that only changes if one of the dependencies has changed (this function is cached).
     // Basically, when this component is re-rendered, this specific function will not be re-created.
