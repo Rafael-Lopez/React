@@ -1,19 +1,33 @@
-import React, {useState, useCallback} from 'react';
+import React, {useReducer, useState, useCallback} from 'react';
 
 import IngredientForm from './IngredientForm';
 import Search from './Search';
 import IngredientList from "./IngredientList";
 import ErrorModal from "../UI/ErrorModal";
 
+const ingredientReducer = (state, action) => {
+    switch (action.type) {
+        case 'SET':
+            return action.ingredients;
+        case 'ADD':
+            return [...state, action.ingredient];
+        case 'DELETE':
+            return state.filter(ing => ing.id !== action.id);
+        default:
+            throw new Error('Should not get here!');
+    }
+};
+
 function Ingredients() {
-    const [userIngredients, setUserIngredients] = useState([]);
+    const [userIngredients, dispatch] = useReducer(ingredientReducer, []);
+    //const [userIngredients, setUserIngredients] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
     // useCallback will return a memoized version of the callback that only changes if one of the dependencies has changed (this function is cached).
     // Basically, when this component is re-rendered, this specific function will not be re-created.
     const filteredIngredientsHandler = useCallback(filteredIngredients => {
-        setUserIngredients(filteredIngredients);
+        dispatch({type: 'SET', ingredients: filteredIngredients});
     }, []);
 
     const addIngredientHandler = ingredient => {
@@ -28,10 +42,7 @@ function Ingredients() {
             return response.json();
         }).then( responseData => {
             //We need a second then() block because json() returns a promise
-            setUserIngredients(prevIngredients => [
-                ...prevIngredients,
-                {id: responseData.name, ...ingredient}
-            ]);
+            dispatch({type: 'ADD', ingredient: {id: responseData.name, ...ingredient}});
         });
     };
 
@@ -41,7 +52,7 @@ function Ingredients() {
             method: 'DELETE'
         }).then( response => {
             setIsLoading(false);
-            setUserIngredients(prevIngredients => userIngredients.filter(ingredient => ingredient.id !== ingredientId));
+            dispatch({type: 'DELETE', id: ingredientId})
         }).catch(error => {
             setError('Something went wrong!');
         });
