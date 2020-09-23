@@ -1,6 +1,6 @@
 import React from 'react';
-import classes from 'PizzaImage.css';
-import PizzaImage from '../../assets/PizzaImage.jpg';
+import classes from './PizzaImage.css';
+import PizzaImage from '../../assets/pizza.jpg';
 
 const pizzaImage = (props) => (
     <div className={classes.PizzaImage}>
@@ -8,4 +8,4 @@ const pizzaImage = (props) => (
     </div>
 );
 
-export default PizzaImage;
+export default pizzaImage;
