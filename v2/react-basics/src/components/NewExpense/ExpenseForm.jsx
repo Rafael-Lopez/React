@@ -3,24 +3,37 @@ import { useState } from "react";
 import "./ExpenseForm.css";
 
 const ExpenseForm = () => {
-  const [title, setTitle] = useState("");
-  const [amount, setAmount] = useState("");
-  const [date, setDate] = useState("");
+  const [newTitle, setNewTitle] = useState("");
+  const [newAmount, setNewAmount] = useState("");
+  const [newDate, setNewDate] = useState("");
 
   const titleChangeHandler = (event) => {
-    setTitle(event.target.value);
+    setNewTitle(event.target.value);
   };
 
   const amountChangeHandler = (event) => {
-    setAmount(event.target.value);
+    setNewAmount(event.target.value);
   };
 
   const dateChangeHandler = (event) => {
-    setDate(event.target.value);
+    setNewDate(event.target.value);
+  };
+
+  const submitHandler = (event) => {
+    // To prevent the default behavior, which in the case of form, sends an HTTP request which results in the page being reloaded
+    event.preventDefault();
+
+    const expenseData = {
+      title: newTitle,
+      amount: newAmount,
+      date: new Date(newDate)
+    };
+
+    console.log(expenseData);
   };
 
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
