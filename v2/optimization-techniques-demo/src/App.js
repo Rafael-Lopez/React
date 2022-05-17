@@ -6,11 +6,24 @@ import Button from "./components/UI/Button/Button";
 
 function App() {
   const [showParagraph, setShowParagraph] = useState(false);
+  const [allowToggle, setAllowToggle] = useState(false);
 
   // You can prevent function recreation (therefore, React.memo() can work appropiately for Button) by using useCallback()
   const toggleParagraphHandler = useCallback(() => {
-    setShowParagraph((previousShowParagraph) => !previousShowParagraph);
-  }, []);
+    if (allowToggle) {
+      setShowParagraph((previousShowParagraph) => !previousShowParagraph);
+    }
+
+    // There are cases where we actually want to recreate a function because values being used in that function that are coming 
+    // from outside the function might have changed. So here, we would want to add allowToggle as a dependency in our dependency array.
+    // This tells React that we generally want to store this function. But, whenever allowToggle changes and it has a new value, 
+    // we want to recreate that function and store that new recreated function. And this ensures that we always use the latest allow 
+    // toggle value inside of that stored function.
+  }, [allowToggle]);
+
+  const allowToggleHandler = () => {
+    setAllowToggle(true);
+  };
 
   console.log("App running...");
 
@@ -29,7 +42,8 @@ function App() {
   return (
     <div className="app">
       <h1>Hi there!</h1>
-      <DemoOutput show={false} />
+      <DemoOutput show={showParagraph} />
+      <Button onClick={allowToggleHandler}>Allow Toggling</Button>
       <Button onClick={toggleParagraphHandler}>Show Paragraph!</Button>
     </div>
   );
