@@ -7,8 +7,8 @@ const Counter = () => {
   // When you use useSelector(), React Redux will automatically set up a subscription to the Redux store for this component.
   // So your component will be updated and will receive the latest counter automatically whenever that data changes in the Redux store.
   // This makes the component reactive, and changes to the Redux store will cause this component function to be re-executed.
-  const counter = useSelector((state) => state.counter);
-  const show = useSelector((state) => state.showCounter);
+  const counter = useSelector((state) => state.counter.counter);
+  const show = useSelector((state) => state.counter.showCounter);
 
   const dispatch = useDispatch();
 

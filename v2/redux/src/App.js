@@ -1,9 +1,16 @@
-import Counter from './components/Counter';
+import { Fragment } from "react";
 
+import Auth from "./components/Auth";
+import Header from "./components/Header";
+import Counter from "./components/Counter";
 
 function App() {
   return (
-    <Counter />
+    <Fragment>
+      <Header></Header>
+      <Auth></Auth>
+      <Counter />
+    </Fragment>
   );
 }
 
