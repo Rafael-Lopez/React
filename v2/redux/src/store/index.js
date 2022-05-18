@@ -1,6 +1,28 @@
 import { createStore } from "redux";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = { counter: 0, showCounter: true };
+
+createSlice({
+  name: 'counter',
+  initialState: initialState,
+  reducers: {
+    increment(state) {
+      // When using redux toolkit, mutating state is allowed 
+      // ReduxToolkit will take care of things internally
+      state.counter++;
+    },
+    decrement(state) {
+      state.counter--;
+    },
+    increase(state, action) {
+      state.counter = state.counter + action.amount;
+    },
+    toggleCounter(state) {
+      state.showCounter = !state.showCounter;
+    }
+  }
+});
 
 const counterReducer = (state = initialState, action) => {
   // When working with Reduc, you should never, super important, never mutate the state - the existing state.
