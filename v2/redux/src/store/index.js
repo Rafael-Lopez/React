@@ -1,9 +1,8 @@
-import { createStore } from "redux";
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, configureStore } from '@reduxjs/toolkit';
 
 const initialState = { counter: 0, showCounter: true };
 
-createSlice({
+const counterSlice = createSlice({
   name: 'counter',
   initialState: initialState,
   reducers: {
@@ -24,40 +23,16 @@ createSlice({
   }
 });
 
-const counterReducer = (state = initialState, action) => {
-  // When working with Reduc, you should never, super important, never mutate the state - the existing state.
-  // You should never change the existing state. Instead, always override it by returning a brand new state object.
-  if (action.type === "increment") {
-    return {
-      counter: state.counter + 1,
-      showCounter: state.showCounter,
-    };
-  }
+const store = configureStore({
+  reducer: counterSlice.reducer
+});
 
-  if (action.type === "increase") {
-    return {
-      counter: state.counter + action.amount,
-      showCounter: state.showCounter,
-    };
-  }
-
-  if (action.type === "decrement") {
-    return {
-      counter: state.counter - 1,
-      showCounter: state.showCounter,
-    };
-  }
-
-  if (action.type === "toggle") {
-    return {
-      showCounter: !state.showCounter,
-      counter: state.counter,
-    };
-  }
-
-  return state;
-};
-
-const store = createStore(counterReducer);
+// If you have multiple reducers, you can pass an object, containing all your reducers 
+// { someName: reducer1, someName2: reducer 2}
+/* 
+const store = configureStore({
+  reducer: { counter: counterSlice.reducer }
+}); 
+*/
 
 export default store;
