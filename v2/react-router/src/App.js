@@ -16,7 +16,7 @@ function App() {
         <Route path="/products">
           <Products />
         </Route>
-        <Route path="/products-detail/:productId">
+        <Route path="/product-detail/:productId">
           <ProductDetail />
         </Route>
       </main>
